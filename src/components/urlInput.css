@@ -1,0 +1,53 @@
+.url-input {
+  font-size: 1rem;
+  padding: 1.2rem;
+  border: 3px solid #03fcca;
+}
+
+.url-input:focus {
+  outline: none;
+  border-color: #b3feef;
+}
+
+.btnQRCodeGenerator {
+  display: block;
+  text-align: center;
+  margin: 1rem auto;
+  padding: 0.5rem 1rem;
+  border-radius: 5px;
+  background: #03fcca;
+  font-size: 1rem;
+}
+
+.errorOccurred {
+  background: #e1a4a4;
+  padding: 1rem;
+  color: white;
+  border-radius: 10px;
+  margin-bottom: 1rem;
+}
+
+.successQRCodeRetrieval {
+  background: #03fcca;
+  padding: 1rem;
+  color: #000;
+  border-radius: 10px;
+  margin-bottom: 1rem;
+}
+
+.flameSpin {
+  color: red;
+  font-size: 2rem;
+  animation: spin 1s linear infinite;
+  transition: 1s all;
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
+}
