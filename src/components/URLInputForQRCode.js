@@ -14,8 +14,20 @@ const URLInput = () => {
   const [success, setSuccessMessage] = useState("");
 
   const updateURL = (urlForQRCode) => {
-    // set the URL code based on the value input from user
-    setURL(urlForQRCode);
+    if (
+      urlForQRCode.length > 4 &&
+      urlForQRCode.indexOf("www.") >= 0 &&
+      urlForQRCode.indexOf("http") < 0 &&
+      urlForQRCode.indexOf("://") < 0
+    ) {
+      urlForQRCode = `https://${urlForQRCode}`;
+
+      // set the URL code based on the value input from user
+      setURL(urlForQRCode);
+    } else {
+      // set the URL code based on the value input from user
+      setURL(urlForQRCode);
+    }
   };
 
   const sanitizeAndRetrieveQRCode = async () => {
@@ -27,10 +39,8 @@ const URLInput = () => {
       setErrorMessage("");
 
       try {
-        // TODO: Clean the URL passed and valid using util
+        // Clean the URL passed and valid using util
         const urlSanitized = sanitizeURL(url);
-
-        console.log(urlSanitized);
 
         if (urlSanitized !== "") {
           const response = await axios.post("/get-qrcode", {
@@ -57,6 +67,9 @@ const URLInput = () => {
           );
         }
       } catch (error) {
+        // Set loading to false since there was an error.
+        setLoading(false);
+
         console.log(`Unsuccessful response to front end ${error.message}`);
         setErrorMessage(error.message);
       }
@@ -75,6 +88,7 @@ const URLInput = () => {
         onChange={(e) => updateURL(e.target.value)}
         name="url-input"
         placeholder="Enter URL for QR Code"
+        value={url}
       />
 
       <button
