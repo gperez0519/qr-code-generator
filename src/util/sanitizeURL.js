@@ -3,8 +3,6 @@ export const sanitizeURL = (url) => {
     /[(http(s)?)://(www.)?a-zA-Z0-9@:%._+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_+.~#?&//=]*)/gi
   );
 
-  console.log(urlValid);
-
   if (urlValid) {
     // Encode the validated URL.
     urlValid = encodeURI(urlValid);

@@ -14,6 +14,7 @@ const URLInput = () => {
   const [success, setSuccessMessage] = useState("");
 
   const updateURL = (urlForQRCode) => {
+    setErrorMessage("");
     if (
       urlForQRCode.length > 4 &&
       urlForQRCode.indexOf("www.") >= 0 &&
@@ -27,6 +28,11 @@ const URLInput = () => {
     } else {
       // set the URL code based on the value input from user
       setURL(urlForQRCode);
+    }
+
+    if (success && qrCode) {
+      setSuccessMessage("");
+      setQRCode("");
     }
   };
 
@@ -70,8 +76,13 @@ const URLInput = () => {
         // Set loading to false since there was an error.
         setLoading(false);
 
-        console.log(`Unsuccessful response to front end ${error.message}`);
-        setErrorMessage(error.message);
+        // console.log(`Unsuccessful response to front end ${error.message}`);
+        // console.log(`Unsuccessful response to front end code ${error.code}`);
+        setErrorMessage(
+          error.code === "ERR_BAD_REQUEST" || error.code === "ECONNREFUSED"
+            ? "Invalid URL. Please enter a valid URL and try again!"
+            : error.message
+        );
       }
     } else {
       // if the url was not valid display the error message to the user.
