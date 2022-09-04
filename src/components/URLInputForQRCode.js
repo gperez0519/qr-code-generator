@@ -90,6 +90,13 @@ const URLInput = () => {
     }
   };
 
+  const handleKeyPress = e => {
+    //it triggers by pressing the enter key
+    if (e.code === "Enter") {
+      sanitizeAndRetrieveQRCode();
+    }
+  };
+
   return (
     <div className="main-qr-container">
       {error && <div className="errorOccurred">{error}</div>}
@@ -99,6 +106,7 @@ const URLInput = () => {
         onChange={(e) => updateURL(e.target.value)}
         name="url-input"
         placeholder="Enter URL for QR Code"
+        onKeyPress={handleKeyPress}
         value={url}
       />
 
